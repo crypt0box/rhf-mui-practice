@@ -23,19 +23,19 @@ const schema = z.object({
   text: z.string(),
 });
 
-type FormProps = z.infer<typeof schema>;
+type Inputs = z.infer<typeof schema>;
 
-const defaultValues: FormProps = {
+const defaultValues: Inputs = {
   text: "",
 };
 
 function App() {
-  const { control, handleSubmit, reset } = useForm<FormProps>({
+  const { control, handleSubmit, reset } = useForm<Inputs>({
     defaultValues: defaultValues,
     resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <RhfTextField label="Text" name="text" control={control} />
