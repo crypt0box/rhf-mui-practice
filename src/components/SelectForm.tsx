@@ -12,14 +12,14 @@ type SelectProps = {
   value: string;
 };
 
-export type SelectFieldProps = MuiSelectProps & {
+export type SelectFormProps = MuiSelectProps & {
   inputRef?: MuiSelectProps["ref"];
   errorMessage?: string;
   selectPropsList: SelectProps[];
   selectedValue: string;
 };
 
-export const SelectField: React.FC<SelectFieldProps> = ({
+export const SelectForm: React.FC<SelectFormProps> = ({
   inputRef,
   errorMessage,
   selectPropsList,

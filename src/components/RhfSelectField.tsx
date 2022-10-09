@@ -5,16 +5,16 @@ import type {
   DeepMap,
   FieldError,
 } from "react-hook-form";
-import { SelectField, SelectFieldProps } from "./SelectForm";
+import { SelectForm, SelectFormProps } from "./SelectForm";
 
-export type RhfSelectFieldProps<T extends FieldValues> = Omit<
-  SelectFieldProps,
+export type RhfSelectFormProps<T extends FieldValues> = Omit<
+  SelectFormProps,
   "selectedValue"
 > &
   UseControllerProps<T>;
 
-export const RhfSelectField = <T extends FieldValues>(
-  props: RhfSelectFieldProps<T>
+export const RhfSelectForm = <T extends FieldValues>(
+  props: RhfSelectFormProps<T>
 ): JSX.Element => {
   const { name, control } = props;
   const {
@@ -23,7 +23,7 @@ export const RhfSelectField = <T extends FieldValues>(
   } = useController<T>({ name, control });
 
   return (
-    <SelectField
+    <SelectForm
       inputRef={ref}
       onChange={(e) => onChange(e)}
       {...rest}
