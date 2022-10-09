@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RhfTextField } from "./components/RhfTextField";
 import { RhfRadioGroup } from "./components/RhfRadioGroup";
+import { RhfSelectField } from "./components/RhfSelectField";
 
 const Form = styled("form")({
   display: "flex",
@@ -23,6 +24,7 @@ const Flex = styled("div")({
 const schema = z.object({
   text: z.string().min(1, { message: "Required" }),
   radio: z.string().min(1, { message: "Required" }),
+  select: z.string().min(1, { message: "Required" }),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -30,6 +32,7 @@ type Inputs = z.infer<typeof schema>;
 const defaultValues: Inputs = {
   text: "",
   radio: "",
+  select: "",
 };
 
 const props = [
@@ -57,7 +60,13 @@ function App() {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <RhfTextField label="Text" name="text" control={control} />
-      <RhfRadioGroup name="radio" control={control} radioProps={props} />
+      <RhfRadioGroup name="radio" control={control} radioPropsList={props} />
+      <RhfSelectField
+        label="Select"
+        name="select"
+        control={control}
+        selectPropsList={props}
+      />
       <Flex>
         <Button type="submit">送信</Button>
         <Button onClick={() => reset()}>リセット</Button>

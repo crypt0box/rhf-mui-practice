@@ -15,12 +15,12 @@ type RadioProps = {
 export type RadioGroupProps = MuiRadioGroupProps & {
   inputRef?: MuiRadioGroupProps["ref"];
   errorMessage?: string;
-  radioProps: RadioProps[];
+  radioPropsList: RadioProps[];
 };
 
 export const RadioGroup: React.FC<RadioGroupProps> = ({
   inputRef,
-  radioProps,
+  radioPropsList,
   errorMessage,
   ...rest
 }) => {
@@ -28,7 +28,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     <div>
       <FormControl error={!!errorMessage}>
         <MuiRadioGroup ref={inputRef} {...rest}>
-          {radioProps.map((el) => (
+          {radioPropsList.map((el) => (
             <FormControlLabel
               key={el.value}
               value={el.value}
