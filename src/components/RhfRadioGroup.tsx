@@ -23,7 +23,7 @@ export const RhfRadioGroup = <T extends FieldValues>(
     <RadioGroup
       inputRef={ref}
       {...rest}
-      radioProps={props.radioProps}
+      {...props}
       errorMessage={
         errors[name] &&
         `${(errors[name] as DeepMap<FieldValues, FieldError>).message}`
