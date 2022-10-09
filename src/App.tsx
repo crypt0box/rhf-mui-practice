@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RhfTextField } from "./components/RhfTextField";
 import { RhfRadioGroup } from "./components/RhfRadioGroup";
-import { RhfSelectForm } from "./components/RhfSelectField";
+import { RhfSelectForm } from "./components/RhfSelectForm";
 
 const Form = styled("form")({
   display: "flex",
