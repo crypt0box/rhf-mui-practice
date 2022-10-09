@@ -20,7 +20,7 @@ const Flex = styled("div")({
 });
 
 const schema = z.object({
-  text: z.string(),
+  text: z.string().min(1, { message: "Required" }),
 });
 
 type Inputs = z.infer<typeof schema>;

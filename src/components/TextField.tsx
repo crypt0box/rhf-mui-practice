@@ -6,20 +6,18 @@ import {
 
 export type TextFieldProps = MuiTextFieldProps & {
   inputRef?: MuiTextFieldProps["ref"];
-  $errorMessage?: string;
+  errorMessage?: string;
 };
 
 export const TextField: React.FC<TextFieldProps> = ({
   inputRef,
-  $errorMessage,
+  errorMessage,
   ...rest
 }) => {
   return (
-    <>
-      <MuiTextField ref={inputRef} error={!!$errorMessage} {...rest} />
-      {!!$errorMessage && (
-        <FormHelperText error>{$errorMessage}</FormHelperText>
-      )}
-    </>
+    <div>
+      <MuiTextField ref={inputRef} error={!!errorMessage} {...rest} />
+      {!!errorMessage && <FormHelperText error>{errorMessage}</FormHelperText>}
+    </div>
   );
 };

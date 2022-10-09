@@ -24,7 +24,7 @@ export const RhfTextField = <T extends FieldValues>(
       inputRef={ref}
       {...rest}
       {...props}
-      $errorMessage={
+      errorMessage={
         errors[name] &&
         `${(errors[name] as DeepMap<FieldValues, FieldError>).message}`
       }
