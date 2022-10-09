@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import "./App.css";
+import { styled, Button } from "@mui/material";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RhfTextField } from "./components/RhfTextField";
+
+const Form = styled("form")({
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
+  alignItems: "center",
+  width: "100%",
+  padding: "16px",
+});
+
+const Flex = styled("div")({
+  display: "flex",
+  gap: "16px",
+});
+
+const schema = z.object({
+  text: z.string(),
+});
+
+type FormProps = z.infer<typeof schema>;
+
+const defaultValues: FormProps = {
+  text: "",
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { control, handleSubmit, reset } = useForm<FormProps>({
+    defaultValues: defaultValues,
+    resolver: zodResolver(schema),
+  });
 
+  const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <RhfTextField label="Text" name="text" control={control} />
+      <Flex>
+        <Button type="submit">送信</Button>
+        <Button onClick={() => reset()}>リセット</Button>
+      </Flex>
+    </Form>
+  );
 }
 
-export default App
+export default App;
