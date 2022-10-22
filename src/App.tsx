@@ -7,6 +7,7 @@ import { RhfTextField } from "./components/RhfTextField";
 import { RhfRadioGroup } from "./components/RhfRadioGroup";
 import { RhfSelectForm } from "./components/RhfSelectForm";
 import { RhfCheckboxGroup } from "./components/RhfCheckboxGroup";
+import { RhfDatePicker } from "./components/RhfDatePicker";
 
 const Form = styled("form")({
   display: "flex",
@@ -27,6 +28,10 @@ const schema = z.object({
   radio: z.string().min(1, { message: "Required" }),
   select: z.string().min(1, { message: "Required" }),
   checkbox: z.string().array().min(1, { message: "Required" }),
+  date: z
+    .date()
+    .nullable()
+    .refine((date) => date !== null, "Required"),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -36,6 +41,7 @@ const defaultValues: Inputs = {
   radio: "",
   select: "",
   checkbox: [],
+  date: null,
 };
 
 const props = [
@@ -75,6 +81,7 @@ function App() {
         control={control}
         checkBoxPropsList={props}
       />
+      <RhfDatePicker name="date" control={control} />
       <Flex>
         <Button type="submit">送信</Button>
         <Button onClick={() => reset()}>リセット</Button>
