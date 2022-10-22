@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RhfTextField } from "./components/RhfTextField";
 import { RhfRadioGroup } from "./components/RhfRadioGroup";
 import { RhfSelectForm } from "./components/RhfSelectForm";
+import { RhfCheckboxGroup } from "./components/RhfCheckboxGroup";
 
 const Form = styled("form")({
   display: "flex",
@@ -25,6 +26,7 @@ const schema = z.object({
   text: z.string().min(1, { message: "Required" }),
   radio: z.string().min(1, { message: "Required" }),
   select: z.string().min(1, { message: "Required" }),
+  checkbox: z.string().array().min(1, { message: "Required" }),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -33,6 +35,7 @@ const defaultValues: Inputs = {
   text: "",
   radio: "",
   select: "",
+  checkbox: [],
 };
 
 const props = [
@@ -66,6 +69,11 @@ function App() {
         name="select"
         control={control}
         selectPropsList={props}
+      />
+      <RhfCheckboxGroup
+        name="checkbox"
+        control={control}
+        checkBoxPropsList={props}
       />
       <Flex>
         <Button type="submit">送信</Button>
