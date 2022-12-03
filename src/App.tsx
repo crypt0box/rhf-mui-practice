@@ -89,10 +89,6 @@ function App() {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Box display="flex" gap={5}>
-        <Link to="/">Home</Link>
-        <Link to="/rhfTest">RhfTest</Link>
-      </Box>
       {fields.map((field, index) => (
         <Flex key={field.id}>
           <RhfTextField
