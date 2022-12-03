@@ -1,22 +1,28 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import { parse } from "date-fns";
 import { useController } from "react-hook-form";
-import type { FieldValues, UseControllerProps } from "react-hook-form";
+import type { FieldValues, UseControllerProps, Control } from "react-hook-form";
 import { RhfTextField } from "./RhfTextField";
 
 /** 日付フォーマットyyyy/MM/ddを文字列とみなした時の長さは10 */
 const DATE_FORMAT_LENGTH = 10;
 
-export type RhfDatePickerProps<T extends FieldValues> = UseControllerProps<T>;
+export type RhfDatePickerProps<T extends FieldValues> = Omit<
+  UseControllerProps<T>,
+  "control"
+> & {
+  control: Control<T>;
+  correlationError?: boolean;
+};
 
 export const RhfDatePicker = <T extends FieldValues>(
   props: RhfDatePickerProps<T>
 ) => {
-  const { name, control } = props;
+  const { name, control, correlationError } = props;
   const {
     // このonChangeで値の変更をRHFに通知(onSubmitやwatchで値を受け取れるようになる)
     field: { onChange, value },
-    formState: { errors },
+    fieldState: { error },
   } = useController<T>({ name, control });
 
   const onSelectDate = (e: Date | null) => {
@@ -46,7 +52,7 @@ export const RhfDatePicker = <T extends FieldValues>(
             ...params.inputProps,
             placeholder: "yyyy/MM/dd",
           }}
-          error={!!errors[name]}
+          error={!!error || correlationError}
           onChange={(e) => {
             // 数値以外を弾く
             if (!/^\d*$/.test(e.target.value)) return;
