@@ -26,7 +26,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
 }) => {
   return (
     <div>
-      <FormControl error={!!errorMessage}>
+      <FormControl>
         <MuiRadioGroup ref={inputRef} {...rest}>
           {radioPropsList.map((el) => (
             <FormControlLabel

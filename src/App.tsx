@@ -1,7 +1,7 @@
 import "./App.css";
 import { styled, Button } from "@mui/material";
 import { z } from "zod";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RhfTextField } from "./components/RhfTextField";
 import { RhfRadioGroup } from "./components/RhfRadioGroup";
@@ -32,6 +32,11 @@ const schema = z.object({
     .date()
     .nullable()
     .refine((date) => date !== null, "Required"),
+  questions: z
+    .object({
+      text1: z.string().max(2, { message: "Required" }),
+    })
+    .array(),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -42,6 +47,7 @@ const defaultValues: Inputs = {
   select: "",
   checkbox: [],
   date: null,
+  questions: [{ text1: "" }],
 };
 
 const props = [
@@ -63,11 +69,36 @@ function App() {
   const { control, handleSubmit, reset } = useForm<Inputs>({
     defaultValues: defaultValues,
     resolver: zodResolver(schema),
+    mode: "onChange",
   });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "questions",
+  });
+
+  const addQuestion = () => {
+    append({ text1: "" });
+  };
+
+  const removeQuestion = (index: number) => {
+    remove(index);
+  };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      {fields.map((field, index) => (
+        <Flex key={field.id}>
+          <RhfTextField
+            label="Text"
+            name={`questions.${index}.text1`}
+            control={control}
+          />
+          <Button onClick={() => removeQuestion(index)}>削除</Button>
+        </Flex>
+      ))}
+      <Button onClick={addQuestion}>追加</Button>
       <RhfTextField label="Text" name="text" control={control} />
       <RhfRadioGroup name="radio" control={control} radioPropsList={props} />
       <RhfSelectForm
