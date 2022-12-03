@@ -1,13 +1,14 @@
 import "./App.css";
-import { styled, Button } from "@mui/material";
+import { styled, Button, Box } from "@mui/material";
 import { z } from "zod";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RhfTextField } from "./components/RhfTextField";
-import { RhfRadioGroup } from "./components/RhfRadioGroup";
-import { RhfSelectForm } from "./components/RhfSelectForm";
-import { RhfCheckboxGroup } from "./components/RhfCheckboxGroup";
-import { RhfDatePicker } from "./components/RhfDatePicker";
+import { Link } from "react-router-dom";
+import { RhfTextField } from "./components/ui/RhfTextField";
+import { RhfRadioGroup } from "./components/ui/RhfRadioGroup";
+import { RhfSelectForm } from "./components/ui/RhfSelectForm";
+import { RhfCheckboxGroup } from "./components/ui/RhfCheckboxGroup";
+import { RhfDatePicker } from "./components/ui/RhfDatePicker";
 
 const Form = styled("form")({
   display: "flex",
@@ -88,6 +89,10 @@ function App() {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      <Box display="flex" gap={5}>
+        <Link to="/">Home</Link>
+        <Link to="/rhfTest">RhfTest</Link>
+      </Box>
       {fields.map((field, index) => (
         <Flex key={field.id}>
           <RhfTextField

@@ -23,13 +23,13 @@ export const RhfTextField = <T extends FieldValues>(
   } = useController<T>({ name, control });
 
   if (name.match(/\./)) {
-    const splitName = name.split(".");
-    // console.log("🚀 ~ file: RhfTextField.tsx:27 ~ splitName", splitName);
-    const first = splitName[0];
-    const second = splitName[1];
-    const a = errors[first] as FieldErrorsImpl<DeepRequired<T>>;
-    const b = a[second];
-    console.log("🚀 ~ file: RhfTextField.tsx:30 ~ b ", b);
+    // const splitName = name.split(".");
+    // // console.log("🚀 ~ file: RhfTextField.tsx:27 ~ splitName", splitName);
+    // const first = splitName[0];
+    // const second = splitName[1];
+    // const a = errors[first] as FieldErrorsImpl<DeepRequired<T>>;
+    // const b = a[second];
+    // console.log("🚀 ~ file: RhfTextField.tsx:30 ~ b ", b);
     // const second = splitName[1];
     // const third = splitName[2];
     // const b = a[second];
