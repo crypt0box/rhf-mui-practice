@@ -1,24 +1,63 @@
 import { Button, TextField } from "@mui/material";
 import { styled } from "@mui/system";
 import { DatePicker } from "@mui/x-date-pickers";
+import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { z } from "zod";
 
 const StyledForm = styled("form")({
   display: "flex",
   flexDirection: "column",
   gap: "10px",
+  padding: "10px",
 });
 
-type Inputs = {
-  userId: string;
-  userName: string;
-  birthday: Date;
-};
+// type Inputs = {
+//   name: string;
+//   weight: number;
+//   birthday: Date;
+// };
 
+// type Request = {
+//   name: string;
+//   weight: number;
+//   birthday: string;
+// };
+
+const schema = z
+  .object({
+    name: z.string().max(10),
+    weight: z.string(),
+    birthday: z.date(),
+  })
+  .transform((inputs) => {
+    return {
+      ...inputs,
+      weight: Number(inputs.weight) < 0 ? 0 : inputs.weight,
+      birthday: inputs.birthday.toISOString(),
+    };
+  });
+
+type Inputs = z.input<typeof schema>;
+/**
+ * type Inputs = {
+ *   name: string;
+ *   weight: string;
+ *   birthday: Date;
+ *  }
+ */
+type Request = z.output<typeof schema>;
+/**
+ * type Request = {
+ *   name: string;
+ *   weight: number;
+ *   birthday: string;
+ *  }
+ */
 export const UserInput = () => {
   const [formInput, setFormInput] = useState<Inputs>({
-    userId: "",
-    userName: "",
+    name: "",
+    weight: "",
     birthday: new Date(),
   });
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,26 +67,39 @@ export const UserInput = () => {
   };
   const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(formInput);
+    try {
+      const request: Request = schema.parse(formInput);
+      axios.post("/api/user", request);
+    } catch (error) {
+      return;
+    }
   };
   return (
     <StyledForm onSubmit={onSubmit}>
       <TextField
-        name="userId"
-        value={formInput.userId}
+        sx={{ width: "200px" }}
+        name="name"
+        label="name"
+        value={formInput.name}
         onChange={handleInput}
       />
       <TextField
-        name="userName"
-        value={formInput.userName}
+        sx={{ width: "200px" }}
+        type="number"
+        name="weight"
+        label="weight"
+        value={formInput.weight}
         onChange={handleInput}
       />
       <DatePicker
+        label="birthday"
         value={formInput.birthday || null}
-        onChange={(e: Date | null) => handleInput}
-        renderInput={(params) => <TextField {...params} name="birthday" />}
+        onChange={() => handleInput}
+        renderInput={(params) => (
+          <TextField {...params} sx={{ width: "200px" }} name="birthday" />
+        )}
       />
-      <Button variant="contained" type="submit">
+      <Button sx={{ width: "200px" }} variant="contained" type="submit">
         送信する
       </Button>
     </StyledForm>
