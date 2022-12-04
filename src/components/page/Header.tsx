@@ -7,6 +7,7 @@ export const Header = () => {
       <Link to="/">Home</Link>
       <Link to="/rhfValidate">RhfValidate</Link>
       <Link to="/range">Range</Link>
+      <Link to="/apiResponse">ApiResponse</Link>
     </Box>
   );
 };
