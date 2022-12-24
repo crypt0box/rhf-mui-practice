@@ -10,6 +10,7 @@ export const Header = () => {
       <Link to='/apiResponse'>ApiResponse</Link>
       <Link to='/userInput'>UserInput</Link>
       <Link to='/zodTransform'>ZodTransform</Link>
+      <Link to='/tablePerformance'>TablePerformance</Link>
     </Box>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DeepMap, FieldError, useController } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import type { FieldValues, UseControllerProps } from 'react-hook-form';
 import { CheckboxGroup, CheckboxGroupProps } from './CheckboxGroup';
 
@@ -15,7 +15,7 @@ export const RhfCheckboxGroup = <T extends FieldValues>(
   const { name, control } = props;
   const {
     field: { ref, onChange, value: checkedValues, ...rest },
-    formState: { errors },
+    fieldState: { error },
   } = useController<T>({ name, control });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,10 +41,7 @@ export const RhfCheckboxGroup = <T extends FieldValues>(
       {...rest}
       checkBoxPropsList={props.checkBoxPropsList}
       checkedValues={[...checkedValues]}
-      errorMessage={
-        errors[name] &&
-        `${(errors[name] as DeepMap<FieldValues, FieldError>).message}`
-      }
+      errorMessage={error && error.message}
     />
   );
 };

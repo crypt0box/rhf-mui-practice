@@ -1,10 +1,5 @@
 import { useController } from 'react-hook-form';
-import type {
-  FieldValues,
-  UseControllerProps,
-  DeepMap,
-  FieldError,
-} from 'react-hook-form';
+import type { FieldValues, UseControllerProps } from 'react-hook-form';
 import { RadioGroup, RadioGroupProps } from './RadioGroup';
 
 export type RhfRadioGroupProps<T extends FieldValues> = RadioGroupProps &
@@ -16,7 +11,7 @@ export const RhfRadioGroup = <T extends FieldValues>(
   const { name, control } = props;
   const {
     field: { ref, ...rest },
-    formState: { errors },
+    fieldState: { error },
   } = useController<T>({ name, control });
 
   return (
@@ -24,10 +19,7 @@ export const RhfRadioGroup = <T extends FieldValues>(
       inputRef={ref}
       {...rest}
       {...props}
-      errorMessage={
-        errors[name] &&
-        `${(errors[name] as DeepMap<FieldValues, FieldError>).message}`
-      }
+      errorMessage={error && error.message}
     />
   );
 };

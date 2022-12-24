@@ -1,10 +1,5 @@
 import { useController } from 'react-hook-form';
-import type {
-  FieldValues,
-  UseControllerProps,
-  DeepMap,
-  FieldError,
-} from 'react-hook-form';
+import type { FieldValues, UseControllerProps } from 'react-hook-form';
 import { SelectForm, SelectFormProps } from './SelectForm';
 
 export type RhfSelectFormProps<T extends FieldValues> = Omit<
@@ -19,7 +14,7 @@ export const RhfSelectForm = <T extends FieldValues>(
   const { name, control } = props;
   const {
     field: { ref, onChange, value: selectedValue, ...rest },
-    formState: { errors },
+    fieldState: { error },
   } = useController<T>({ name, control });
 
   return (
@@ -29,10 +24,7 @@ export const RhfSelectForm = <T extends FieldValues>(
       {...rest}
       {...props}
       selectedValue={selectedValue}
-      errorMessage={
-        errors[name] &&
-        `${(errors[name] as DeepMap<FieldValues, FieldError>).message}`
-      }
+      errorMessage={error && error.message}
     />
   );
 };
