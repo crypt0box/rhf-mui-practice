@@ -22,7 +22,7 @@ const schema = z
   .transform((inputs) => {
     return {
       ...inputs,
-      weight: Number(inputs.weight) < 0 ? 0 : inputs.weight,
+      weight: inputs.weight.length,
       birthday: inputs.birthday.toISOString(),
     };
   });
@@ -49,11 +49,9 @@ export const ZodTransform = () => {
     defaultValues: { name: '', weight: '', birthday: new Date() },
   });
 
-  const onSubmit = (data: Inputs) => {
-    console.log(
-      '🚀 ~ file: ZodTransform.tsx:51 ~ onSubmit ~ data',
-      typeof data.birthday
-    );
+  const onSubmit = <T,>(data: T) => {
+    const d = data as Request;
+    console.log('🚀 ~ file: ZodTransform.tsx:51 ~ onSubmit ~ data', d);
   };
 
   return (
@@ -66,7 +64,6 @@ export const ZodTransform = () => {
       />
       <RhfTextField
         sx={{ width: '200px' }}
-        type='number'
         name='weight'
         label='weight'
         control={control}
