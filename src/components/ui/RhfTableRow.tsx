@@ -4,7 +4,9 @@ import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { Checkbox } from './Checkbox';
 
 export type RhfTableRow<T extends FieldValues> = TableRowProps &
-  UseControllerProps<T> & { children: React.ReactNode; index: number };
+  UseControllerProps<T> & {
+    children: React.ReactNode;
+  };
 
 export const RhfTableRow = <T extends FieldValues>(
   props: RhfTableRow<T>
@@ -13,6 +15,7 @@ export const RhfTableRow = <T extends FieldValues>(
   const {
     field: { ref, onChange, value, ...rest },
   } = useController<T>({ name, control });
+
   return (
     <TableRow sx={{ backgroundColor: value && '#E6F2FF' }}>
       <TableCell>
@@ -22,6 +25,7 @@ export const RhfTableRow = <T extends FieldValues>(
             onChange(e.target.checked);
           }}
           {...rest}
+          checked={value || false}
         />
       </TableCell>
       {children}

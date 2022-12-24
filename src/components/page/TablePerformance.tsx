@@ -7,6 +7,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { Checkbox } from '../ui/Checkbox';
 import { RhfTableRow } from '../ui/RhfTableRow';
 
 type Table = {
@@ -14,7 +15,7 @@ type Table = {
 };
 
 export const TablePerformance = () => {
-  const { control, handleSubmit } = useForm<Table>({
+  const { control, handleSubmit, setValue } = useForm<Table>({
     defaultValues: { ids: [] },
   });
   const onSubmit = (data: Table) => {
@@ -34,13 +35,29 @@ export const TablePerformance = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Check</TableCell>
+            <TableCell>
+              <Checkbox
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setValue(
+                      'ids',
+                      Array.from({ length: 500 }).fill(true) as boolean[]
+                    );
+                  } else {
+                    setValue(
+                      'ids',
+                      Array.from({ length: 500 }).fill(false) as boolean[]
+                    );
+                  }
+                }}
+              />
+            </TableCell>
             <TableCell>Id</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <RhfTableRow key={i} index={i} name={`ids.${i}`} control={control}>
+          {Array.from({ length: 500 }).map((_, i) => (
+            <RhfTableRow key={i} name={`ids.${i}`} control={control}>
               <TableCell>{i}</TableCell>
             </RhfTableRow>
           ))}
