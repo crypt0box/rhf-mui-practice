@@ -9,7 +9,7 @@ export type RhfTableRow<T extends FieldValues> = TableRowProps &
 export const RhfTableRow = <T extends FieldValues>(
   props: RhfTableRow<T>
 ): JSX.Element => {
-  const { name, control, children, index } = props;
+  const { name, control, children } = props;
   const {
     field: { ref, onChange, value, ...rest },
   } = useController<T>({ name, control });

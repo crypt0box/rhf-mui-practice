@@ -10,15 +10,22 @@ import { useForm } from 'react-hook-form';
 import { RhfTableRow } from '../ui/RhfTableRow';
 
 type Table = {
-  id: number[];
+  ids: boolean[];
 };
 
 export const TablePerformance = () => {
   const { control, handleSubmit } = useForm<Table>({
-    defaultValues: { id: [] },
+    defaultValues: { ids: [] },
   });
   const onSubmit = (data: Table) => {
-    console.log('🚀 ~ file: TablePerformance.tsx:18 ~ onSubmit ~ data', data);
+    // 条件に一致するインデックスの配列を返す
+    const indexes = data.ids
+      .map((checked, index) => (checked ? index : null))
+      .filter((index) => index !== null) as number[];
+    console.log(
+      '🚀 ~ file: TablePerformance.tsx:25 ~ onSubmit ~ indexes',
+      indexes
+    );
   };
 
   return (
@@ -32,8 +39,8 @@ export const TablePerformance = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.from({ length: 3 }).map((_, i) => (
-            <RhfTableRow key={i} index={i} name={`id.${i}`} control={control}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <RhfTableRow key={i} index={i} name={`ids.${i}`} control={control}>
               <TableCell>{i}</TableCell>
             </RhfTableRow>
           ))}
