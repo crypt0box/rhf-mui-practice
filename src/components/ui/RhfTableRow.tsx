@@ -1,7 +1,6 @@
 import { TableCell, TableRow, TableRowProps } from '@mui/material';
 import { UseControllerProps, useController } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
-import { Checkbox } from './Checkbox';
 
 export type RhfTableRow<T extends FieldValues> = TableRowProps &
   UseControllerProps<T> & {
@@ -19,14 +18,23 @@ export const RhfTableRow = <T extends FieldValues>(
   return (
     <TableRow sx={{ backgroundColor: value && '#E6F2FF' }}>
       <TableCell>
-        <Checkbox
-          inputRef={ref}
+        <input
+          type='checkbox'
+          ref={ref}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             onChange(e.target.checked);
           }}
           {...rest}
           checked={value || false}
         />
+        {/* <Checkbox
+          inputRef={ref}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange(e.target.checked);
+          }}
+          {...rest}
+          checked={value || false}
+        /> */}
       </TableCell>
       {children}
     </TableRow>
