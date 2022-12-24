@@ -1,5 +1,5 @@
-import { TextField } from "@mui/material";
-import { Controller, Control, FieldValues, Path } from "react-hook-form";
+import { TextField } from '@mui/material';
+import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 
 type ControlTextFieldProps<T extends FieldValues> = {
   name: Path<T>;
@@ -13,18 +13,18 @@ export const ControlTextField = <T extends FieldValues>(
     <Controller
       {...props}
       rules={{
-        required: "必須やよ",
+        required: '必須やよ',
         validate: (value) =>
-          value !== "hoge"
+          value !== 'hoge'
             ? undefined
-            : `「hoge」を含んだ文字列を入力してください`,
+            : '「hoge」を含んだ文字列を入力してください',
       }}
       render={({ field, fieldState }) => {
         return (
           <TextField
             {...field}
-            type="text"
-            label="名前"
+            type='text'
+            label='名前'
             error={fieldState.error !== undefined}
             helperText={fieldState.error?.message}
           />

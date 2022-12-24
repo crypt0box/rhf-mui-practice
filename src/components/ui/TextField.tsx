@@ -2,10 +2,10 @@ import {
   FormHelperText,
   TextField as MuiTextField,
   TextFieldProps as MuiTextFieldProps,
-} from "@mui/material";
+} from '@mui/material';
 
 export type TextFieldProps = MuiTextFieldProps & {
-  inputRef?: MuiTextFieldProps["ref"];
+  inputRef?: MuiTextFieldProps['ref'];
   errorMessage?: string;
 };
 

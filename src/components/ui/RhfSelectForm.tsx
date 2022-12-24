@@ -1,15 +1,15 @@
-import { useController } from "react-hook-form";
+import { useController } from 'react-hook-form';
 import type {
   FieldValues,
   UseControllerProps,
   DeepMap,
   FieldError,
-} from "react-hook-form";
-import { SelectForm, SelectFormProps } from "./SelectForm";
+} from 'react-hook-form';
+import { SelectForm, SelectFormProps } from './SelectForm';
 
 export type RhfSelectFormProps<T extends FieldValues> = Omit<
   SelectFormProps,
-  "selectedValue"
+  'selectedValue'
 > &
   UseControllerProps<T>;
 

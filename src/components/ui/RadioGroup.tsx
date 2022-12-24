@@ -4,8 +4,8 @@ import {
   FormHelperText,
   Radio,
   RadioGroup as MuiRadioGroup,
-} from "@mui/material";
-import type { RadioGroupProps as MuiRadioGroupProps } from "@mui/material";
+} from '@mui/material';
+import type { RadioGroupProps as MuiRadioGroupProps } from '@mui/material';
 
 type RadioProps = {
   value: string;
@@ -13,7 +13,7 @@ type RadioProps = {
 };
 
 export type RadioGroupProps = MuiRadioGroupProps & {
-  inputRef?: MuiRadioGroupProps["ref"];
+  inputRef?: MuiRadioGroupProps['ref'];
   errorMessage?: string;
   radioPropsList: RadioProps[];
 };

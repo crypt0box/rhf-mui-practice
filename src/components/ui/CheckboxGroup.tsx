@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
   Checkbox,
   FormControlLabel,
   FormGroup,
   FormHelperText,
-} from "@mui/material";
-import type { FormGroupProps } from "@mui/material";
+} from '@mui/material';
+import type { FormGroupProps } from '@mui/material';
 
 type CheckboxProps = {
   value: string;
@@ -13,7 +13,7 @@ type CheckboxProps = {
 };
 
 export type CheckboxGroupProps = FormGroupProps & {
-  inputRef?: FormGroupProps["ref"];
+  inputRef?: FormGroupProps['ref'];
   errorMessage?: string;
   checkBoxPropsList: CheckboxProps[];
   checkedValues: string[];

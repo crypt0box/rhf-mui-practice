@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { FormHelperText } from "@mui/material";
-import { useEffect } from "react";
+import styled from '@emotion/styled';
+import { FormHelperText } from '@mui/material';
+import { useEffect } from 'react';
 import {
   Control,
   FieldValues,
@@ -8,8 +8,8 @@ import {
   useController,
   UseFormSetError,
   UseFormClearErrors,
-} from "react-hook-form";
-import { RhfDatePicker } from "./RhfDatePicker";
+} from 'react-hook-form';
+import { RhfDatePicker } from './RhfDatePicker';
 
 type RhfDateRangePickerProps<T extends FieldValues> = {
   correlationName: Path<T>;
@@ -20,10 +20,10 @@ type RhfDateRangePickerProps<T extends FieldValues> = {
   clearErrors: UseFormClearErrors<T>;
 };
 
-const VStack = styled("div")({
-  display: "flex",
-  flexDirection: "column",
-  gap: "1rem",
+const VStack = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
 });
 
 export const RhfDateRangePicker = <T extends FieldValues>(
@@ -56,7 +56,7 @@ export const RhfDateRangePicker = <T extends FieldValues>(
     }
     if (fromValue > toValue) {
       setError(correlationName, {
-        message: "From must be less than or equal to To",
+        message: 'From must be less than or equal to To',
       });
       return;
     }

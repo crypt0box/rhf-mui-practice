@@ -1,11 +1,11 @@
-import React from "react";
-import { DeepMap, FieldError, useController } from "react-hook-form";
-import type { FieldValues, UseControllerProps } from "react-hook-form";
-import { CheckboxGroup, CheckboxGroupProps } from "./CheckboxGroup";
+import React from 'react';
+import { DeepMap, FieldError, useController } from 'react-hook-form';
+import type { FieldValues, UseControllerProps } from 'react-hook-form';
+import { CheckboxGroup, CheckboxGroupProps } from './CheckboxGroup';
 
 export type RhfCheckboxGroupProps<T extends FieldValues> = Omit<
   CheckboxGroupProps,
-  "checkedValues"
+  'checkedValues'
 > &
   UseControllerProps<T>;
 

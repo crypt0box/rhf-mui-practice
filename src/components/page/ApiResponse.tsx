@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
-import axios from "axios";
-import { useState } from "react";
-import { z } from "zod";
+import { Button } from '@mui/material';
+import axios from 'axios';
+import { useState } from 'react';
+import { z } from 'zod';
 
 // type TodoResponse = {
 //   userId: string;
@@ -23,7 +23,7 @@ export const ApiResponse = () => {
   const [todo, setTodo] = useState<TodoResponse>();
   const onClickButton = async () => {
     const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos/1"
+      'https://jsonplaceholder.typicode.com/todos/1'
     );
     try {
       const data = TodoSchema.parse(response.data);
@@ -42,7 +42,7 @@ export const ApiResponse = () => {
           <li>id: {todo.id}</li>
           <li>title: {todo.title}</li>
           {/* 👇本当はbooleanなのにtoFixedが使える */}
-          <li>completed: {todo.completed.toFixed(2) ? "true" : "false"}</li>
+          <li>completed: {todo.completed.toFixed(2) ? 'true' : 'false'}</li>
         </ul>
       )}
     </>

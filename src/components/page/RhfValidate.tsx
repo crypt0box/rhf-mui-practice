@@ -1,11 +1,11 @@
-import { ControlTextField } from "../ui/ControlTextField";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Button } from "@mui/material";
-import { styled } from "@mui/system";
+import { ControlTextField } from '../ui/ControlTextField';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Button } from '@mui/material';
+import { styled } from '@mui/system';
 
-const StyledForm = styled("form")({
-  display: "flex",
-  flexDirection: "column",
+const StyledForm = styled('form')({
+  display: 'flex',
+  flexDirection: 'column',
 });
 
 type Inputs = {
@@ -21,8 +21,8 @@ export const RhfValidate = () => {
   };
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <ControlTextField name="text.name" control={control} />
-      <Button variant="contained" type="submit">
+      <ControlTextField name='text.name' control={control} />
+      <Button variant='contained' type='submit'>
         送信する
       </Button>
     </StyledForm>

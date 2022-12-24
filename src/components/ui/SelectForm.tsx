@@ -4,8 +4,8 @@ import {
   InputLabel,
   MenuItem,
   Select,
-} from "@mui/material";
-import type { SelectProps as MuiSelectProps } from "@mui/material";
+} from '@mui/material';
+import type { SelectProps as MuiSelectProps } from '@mui/material';
 
 type SelectProps = {
   label: string;
@@ -13,7 +13,7 @@ type SelectProps = {
 };
 
 export type SelectFormProps = MuiSelectProps & {
-  inputRef?: MuiSelectProps["ref"];
+  inputRef?: MuiSelectProps['ref'];
   errorMessage?: string;
   selectPropsList: SelectProps[];
   selectedValue: string;

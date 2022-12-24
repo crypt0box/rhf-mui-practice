@@ -1,15 +1,15 @@
-import { DatePicker } from "@mui/x-date-pickers";
-import { parse } from "date-fns";
-import { useController } from "react-hook-form";
-import type { FieldValues, UseControllerProps, Control } from "react-hook-form";
-import { RhfTextField } from "./RhfTextField";
+import { DatePicker } from '@mui/x-date-pickers';
+import { parse } from 'date-fns';
+import { useController } from 'react-hook-form';
+import type { FieldValues, UseControllerProps, Control } from 'react-hook-form';
+import { RhfTextField } from './RhfTextField';
 
 /** 日付フォーマットyyyy/MM/ddを文字列とみなした時の長さは10 */
 const DATE_FORMAT_LENGTH = 10;
 
 export type RhfDatePickerProps<T extends FieldValues> = Omit<
   UseControllerProps<T>,
-  "control"
+  'control'
 > & {
   control: Control<T>;
   correlationError?: boolean;
@@ -34,11 +34,11 @@ export const RhfDatePicker = <T extends FieldValues>(
     // ex) yyyy/MM/dd{任意の文字}のように入力できてしまう
     if (value.length > DATE_FORMAT_LENGTH) {
       onChange(
-        parse(value.slice(0, DATE_FORMAT_LENGTH), "yyyy/MM/dd", new Date())
+        parse(value.slice(0, DATE_FORMAT_LENGTH), 'yyyy/MM/dd', new Date())
       );
       return;
     }
-    onChange(parse(value, "yyyy/MM/dd", new Date()));
+    onChange(parse(value, 'yyyy/MM/dd', new Date()));
   };
 
   return (
@@ -50,7 +50,7 @@ export const RhfDatePicker = <T extends FieldValues>(
           {...params}
           inputProps={{
             ...params.inputProps,
-            placeholder: "yyyy/MM/dd",
+            placeholder: 'yyyy/MM/dd',
           }}
           error={!!error || correlationError}
           onChange={(e) => {
