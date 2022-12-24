@@ -19,6 +19,7 @@ export const RhfTableRow = <T extends FieldValues>(
     <TableRow sx={{ backgroundColor: value && '#E6F2FF' }}>
       <TableCell>
         <input
+          style={{ width: '18px', height: '18px', cursor: 'pointer' }}
           type='checkbox'
           ref={ref}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

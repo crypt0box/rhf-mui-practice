@@ -7,7 +7,6 @@ import {
   TableRow,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Checkbox } from '../ui/Checkbox';
 import { RhfTableRow } from '../ui/RhfTableRow';
 
 type Table = {
@@ -36,7 +35,9 @@ export const TablePerformance = () => {
         <TableHead>
           <TableRow>
             <TableCell>
-              <Checkbox
+              <input
+                type='checkbox'
+                style={{ width: '18px', height: '18px', cursor: 'pointer' }}
                 onChange={(e) => {
                   if (e.target.checked) {
                     setValue(
