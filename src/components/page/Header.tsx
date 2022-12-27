@@ -11,6 +11,7 @@ export const Header = () => {
       <Link to='/userInput'>UserInput</Link>
       <Link to='/zodTransform'>ZodTransform</Link>
       <Link to='/tablePerformance'>TablePerformance</Link>
+      <Link to='/imageList'>ImageList</Link>
     </Box>
   );
 };

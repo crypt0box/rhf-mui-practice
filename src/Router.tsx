@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import { ApiResponse } from './components/page/ApiResponse';
+import { ImageList } from './components/page/ImageList';
 import { Range } from './components/page/Range';
 import { RhfValidate } from './components/page/RhfValidate';
 import { TablePerformance } from './components/page/TablePerformance';
@@ -20,6 +21,7 @@ export const Router = () => {
           <Route path='/userInput' element={<UserInput />} />
           <Route path='/zodTransform' element={<ZodTransform />} />
           <Route path='/tablePerformance' element={<TablePerformance />} />
+          <Route path='/imageList' element={<ImageList />} />
         </Route>
       </Routes>
     </BrowserRouter>
