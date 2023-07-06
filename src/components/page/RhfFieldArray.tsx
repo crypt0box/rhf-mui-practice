@@ -3,7 +3,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { RhfTextField } from '../ui/RhfTextField';
 import { Box, Button } from '@mui/material';
-// http://localhost:5173/rhfFieldArray
+// url -> http://localhost:5173/rhfFieldArray
 const schema = z
   .object({
     names: z.array(
@@ -13,18 +13,49 @@ const schema = z
       })
     ),
   })
+  // firstName列の重複チェック
   .superRefine((arr, ctx) => {
     const firstNameList = arr.names.map((name) => name.firstName);
-    arr.names.forEach((name, index) => {
-      // 自分以外の要素の配列
+    arr.names.forEach(({ firstName, lastName }, index) => {
+      // 入力したformの値以外のformのfirstNameのリスト
       const firstNameListFilteredMe = firstNameList.filter(
         (_, idx) => idx !== index
       );
-      if (firstNameListFilteredMe.includes(name.firstName)) {
+      // 入力したformの値とその他のフォームの値が重複しているかチェック
+      if (
+        firstName &&
+        lastName &&
+        firstNameListFilteredMe.includes(firstName)
+      ) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: `sokan`,
+          message: `col_correlation`,
           path: ['names', index, 'firstName'],
+        });
+      }
+    });
+  })
+  // 行の重複チェック
+  // firstName側にエラーメッセージを表示
+  .superRefine((arr, ctx) => {
+    arr.names.forEach(({ firstName, lastName }, index) => {
+      if (firstName && lastName && firstName === lastName) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `row_correlation`,
+          path: ['names', index, 'firstName'],
+        });
+      }
+    });
+  })
+  // lastName側にエラーメッセージを表示
+  .superRefine((arr, ctx) => {
+    arr.names.forEach(({ firstName, lastName }, index) => {
+      if (firstName && lastName && firstName === lastName) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `row_correlation`,
+          path: ['names', index, 'lastName'],
         });
       }
     });
