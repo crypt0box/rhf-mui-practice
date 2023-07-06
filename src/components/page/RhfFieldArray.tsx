@@ -3,24 +3,31 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { RhfTextField } from '../ui/RhfTextField';
 import { Box, Button } from '@mui/material';
-
+// http://localhost:5173/rhfFieldArray
 const schema = z
   .object({
     names: z.array(
-      z
-        .object({
-          firstName: z.string().max(2),
-          lastName: z.string().max(2),
-        })
-        .refine((val) => val.firstName !== val.lastName, {
-          message: 'as',
-          path: ['firstName'],
-        })
+      z.object({
+        firstName: z.string().max(5),
+        lastName: z.string().max(5),
+      })
     ),
   })
-  .refine((arr) => arr.names[0].firstName !== arr.names[1].firstName, {
-    message: 'sokan',
-    path: ['names.0.firstName'],
+  .superRefine((arr, ctx) => {
+    const firstNameList = arr.names.map((name) => name.firstName);
+    arr.names.forEach((name, index) => {
+      // 自分以外の要素の配列
+      const firstNameListFilteredMe = firstNameList.filter(
+        (_, idx) => idx !== index
+      );
+      if (firstNameListFilteredMe.includes(name.firstName)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `sokan`,
+          path: ['names', index, 'firstName'],
+        });
+      }
+    });
   });
 
 type Inputs = z.input<typeof schema>;
