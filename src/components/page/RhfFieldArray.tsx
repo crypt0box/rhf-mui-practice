@@ -4,19 +4,24 @@ import { z } from 'zod';
 import { RhfTextField } from '../ui/RhfTextField';
 import { Box, Button } from '@mui/material';
 
-const schema = z.object({
-  names: z.array(
-    z
-      .object({
-        firstName: z.string().max(2),
-        lastName: z.string().max(2),
-      })
-      .refine((val) => val.firstName !== val.lastName, {
-        message: 'as',
-        path: ['firstName'],
-      })
-  ),
-});
+const schema = z
+  .object({
+    names: z.array(
+      z
+        .object({
+          firstName: z.string().max(2),
+          lastName: z.string().max(2),
+        })
+        .refine((val) => val.firstName !== val.lastName, {
+          message: 'as',
+          path: ['firstName'],
+        })
+    ),
+  })
+  .refine((arr) => arr.names[0].firstName !== arr.names[1].firstName, {
+    message: 'sokan',
+    path: ['names.0.firstName'],
+  });
 
 type Inputs = z.input<typeof schema>;
 
