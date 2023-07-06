@@ -8,6 +8,7 @@ import { TablePerformance } from './components/page/TablePerformance';
 import { UserInput } from './components/page/UserInput';
 import { ZodTransform } from './components/page/ZodTransform';
 import { PageFrame } from './PageFrame';
+import { RhfFieldArray } from './components/page/RhfFieldArray';
 
 export const Router = () => {
   return (
@@ -22,6 +23,7 @@ export const Router = () => {
           <Route path='/zodTransform' element={<ZodTransform />} />
           <Route path='/tablePerformance' element={<TablePerformance />} />
           <Route path='/imageList' element={<ImageList />} />
+          <Route path='/rhfFieldArray' element={<RhfFieldArray />} />
         </Route>
       </Routes>
     </BrowserRouter>
