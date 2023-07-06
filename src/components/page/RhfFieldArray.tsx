@@ -16,17 +16,13 @@ const schema = z
   // firstName列の重複チェック
   .superRefine((arr, ctx) => {
     const firstNameList = arr.names.map((name) => name.firstName);
-    arr.names.forEach(({ firstName, lastName }, index) => {
+    arr.names.forEach(({ firstName }, index) => {
       // 入力したformの値以外のformのfirstNameのリスト
       const firstNameListFilteredMe = firstNameList.filter(
         (_, idx) => idx !== index
       );
       // 入力したformの値とその他のフォームの値が重複しているかチェック
-      if (
-        firstName &&
-        lastName &&
-        firstNameListFilteredMe.includes(firstName)
-      ) {
+      if (firstName && firstNameListFilteredMe.includes(firstName)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: `col_correlation`,
