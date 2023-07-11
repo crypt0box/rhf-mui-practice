@@ -13,6 +13,7 @@ export const Header = () => {
       <Link to='/tablePerformance'>TablePerformance</Link>
       <Link to='/imageList'>ImageList</Link>
       <Link to='/rhfFieldArray'>RhfFieldArray</Link>
+      <Link to='/memo'>Memo</Link>
     </Box>
   );
 };
