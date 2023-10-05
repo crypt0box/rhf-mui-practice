@@ -8,12 +8,14 @@ import {
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { RhfTableRow } from '../ui/RhfTableRow';
+import { useTransition } from 'react';
 
 type Table = {
   ids: boolean[];
 };
 
 export const TablePerformance = () => {
+  const [isPending, startTransition] = useTransition();
   const { control, handleSubmit, setValue } = useForm<Table>({
     defaultValues: { ids: [] },
   });
@@ -40,15 +42,19 @@ export const TablePerformance = () => {
                 style={{ width: '18px', height: '18px', cursor: 'pointer' }}
                 onChange={(e) => {
                   if (e.target.checked) {
-                    setValue(
-                      'ids',
-                      Array.from({ length: 500 }).fill(true) as boolean[]
-                    );
+                    startTransition(() => {
+                      setValue(
+                        'ids',
+                        Array.from({ length: 2000 }).fill(true) as boolean[]
+                      );
+                    });
                   } else {
-                    setValue(
-                      'ids',
-                      Array.from({ length: 500 }).fill(false) as boolean[]
-                    );
+                    startTransition(() => {
+                      setValue(
+                        'ids',
+                        Array.from({ length: 2000 }).fill(false) as boolean[]
+                      );
+                    });
                   }
                 }}
               />
@@ -57,7 +63,7 @@ export const TablePerformance = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.from({ length: 500 }).map((_, i) => (
+          {Array.from({ length: 2000 }).map((_, i) => (
             <RhfTableRow key={i} name={`ids.${i}`} control={control}>
               <TableCell>{i}</TableCell>
             </RhfTableRow>
