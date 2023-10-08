@@ -10,6 +10,7 @@ import { ZodTransform } from './components/page/ZodTransform';
 import { PageFrame } from './PageFrame';
 import { RhfFieldArray } from './components/page/RhfFieldArray';
 import { Memo } from './components/page/Memo';
+import { Ky } from './components/page/Ky';
 
 export const Router = () => {
   return (
@@ -26,6 +27,7 @@ export const Router = () => {
           <Route path='/imageList' element={<ImageList />} />
           <Route path='/rhfFieldArray' element={<RhfFieldArray />} />
           <Route path='/memo' element={<Memo />} />
+          <Route path='/ky' element={<Ky />} />
         </Route>
       </Routes>
     </BrowserRouter>
